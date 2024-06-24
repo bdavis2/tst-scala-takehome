@@ -1,8 +1,14 @@
 # Required 
 Scala version 3.4.2
 
-Make
-# Running
-Clone this repo to a local directory and run `make run`. You can also compile it manually by running `scalac ./src/main1/scala/*`
+sbt version 1.10.0
 
-TODO: add tests & make test macro
+# Running:
+1. clone or download this project into a local directory
+2. run `sbt shell` in the project directory
+3. type `~run`
+
+# Testing:
+1. clone or download this project into a local directory
+2. run `sbt shell` in the project directory
+3. type `~test`

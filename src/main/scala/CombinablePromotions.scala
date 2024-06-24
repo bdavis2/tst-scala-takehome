@@ -1,31 +1,10 @@
+package promotioncombinations
+
+
 object CombinablePromotions {
   case class Promotion(code: String, notCombinableWith: Seq[String])
 
   case class PromotionCombo(promotionCodes: Seq[String])
-
-  def main(args: Array[String]): Unit = {
-    val promotions = Seq(
-      Promotion("P1", Seq("P3")),
-      Promotion("P2", Seq("P4", "P5")),
-      Promotion("P3", Seq("P1")),
-      Promotion("P4", Seq("P2")),
-      Promotion("P5", Seq("P2"))
-    )
-
-    println(
-      "All Promotion Combinations:\n" + allCombinablePromotions(promotions)
-    )
-
-    println(
-      "All Promotions for P3:\n" + combinablePromotions("P3", promotions)
-        .mkString("\n")
-    )
-
-    println(
-      "All Promotions for P2:\n" + combinablePromotions("P2", promotions)
-        .mkString("\n")
-    )
-  }
 
   def allCombinablePromotions(
                                allPromotions: Seq[Promotion]
@@ -73,7 +52,10 @@ object CombinablePromotions {
                             promotionCode: String,
                             allPromotions: Seq[Promotion]
                           ): Seq[PromotionCombo] = {
-    allCombinablePromotions(allPromotions).filter(
+    if (!allPromotions.map(promotion => promotionCode).contains(promotionCode)) {
+      throw new NoSuchElementException("Promotion: " + promotionCode + " does not exist in list of promotions")
+    } 
+      allCombinablePromotions(allPromotions).filter(
       _.promotionCodes.contains(promotionCode)
     )
   }
